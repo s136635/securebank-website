@@ -1,8 +1,0 @@
-# Create images folder
-mkdir images
-
-# Move all images to the folder
-mv banking1.jpg images/
-mv banking2.jpg images/
-mv banking3.jpg images/
-mv logo.png images/
