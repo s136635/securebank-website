@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Feedback - SecureBank</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+            <img src="images/logo.png" alt="Bank Logo" width="40" height="40" class="d-inline-block align-text-top me-2">
+                SecureBank
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="accounts.html">Accounts</a></li>
+                    <li class="nav-item"><a class="nav-link" href="transfers.html">Transfers</a></li>
+                    <li class="nav-item"><a class="nav-link" href="loans.html">Loans</a></li>
+                    <li class="nav-item"><a class="nav-link" href="support.html">Support</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="questionnaire.html">Feedback</a></li>
+                    <li class="nav-item"><a class="nav-link" href="calculator.html">Calculator</a></li>
+                    <li class="nav-item"><a class="nav-link" href="funpage.html">Fun & Games</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <!-- Alert Component (Bootstrap Interactive Component #1) -->
+                <div id="formAlert" class="alert alert-warning alert-dismissible fade show d-none" role="alert">
+                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                    <strong>Important:</strong> Please complete all required fields before submitting.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+                
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h1 class="h3 mb-0"><i class="bi bi-chat-square-text me-2"></i>Customer Feedback Questionnaire</h1>
+                        <p class="mb-0 mt-2">Help us improve our services by sharing your experience</p>
+                    </div>
+                    <div class="card-body p-4">
+                        <!-- Feedback Form -->
+                        <form id="feedbackForm" class="needs-validation" novalidate>
+                            <!-- Personal Information Section -->
+                            <section class="border-start border-primary ps-3 mb-4">
+                                <h3 class="h5 text-primary mb-3">Personal Information</h3>
+                                
+                                <div class="row g-3">
+                                    <!-- Full Name -->
+                                    <div class="col-md-6">
+                                        <label for="fullName" class="form-label">Full Name *</label>
+                                        <input type="text" class="form-control" id="fullName" name="fullName" 
+                                               placeholder="Enter your full name" required>
+                                        <div class="form-text text-muted">
+                                            Please enter your full name (2-50 characters, letters and spaces only)
+                                        </div>
+                                        <div class="invalid-feedback" id="fullNameError">
+                                            Please provide a valid full name.
+                                        </div>
+                                    </div>
+
+                                    <!-- Email Address -->
+                                    <div class="col-md-6">
+                                        <label for="email" class="form-label">Email Address *</label>
+                                        <input type="email" class="form-control" id="email" name="email" 
+                                               placeholder="your.email@example.com" required>
+                                        <div class="form-text text-muted">
+                                            We'll never share your email with anyone else
+                                        </div>
+                                        <div class="invalid-feedback" id="emailError">
+                                            Please provide a valid email address.
+                                        </div>
+                                    </div>
+
+                                    <!-- Phone Number -->
+                                    <div class="col-md-6">
+                                        <label for="phone" class="form-label">Phone Number *</label>
+                                        <input type="tel" class="form-control" id="phone" name="phone" 
+                                               placeholder="+968 XX XXX XXX" required>
+                                        <div class="form-text text-muted">
+                                            Omani phone number format: +968 followed by 8 digits
+                                        </div>
+                                        <div class="invalid-feedback" id="phoneError">
+                                            Please provide a valid Omani phone number.
+                                        </div>
+                                    </div>
+
+                                    <!-- Age Group -->
+                                    <div class="col-md-6">
+                                        <label class="form-label">Age Group *</label>
+                                        <div class="btn-group w-100" role="group" id="ageGroup">
+                                            <input type="radio" class="btn-check" name="ageGroup" id="age18-25" value="18-25" required>
+                                            <label class="btn btn-outline-primary" for="age18-25">18-25</label>
+
+                                            <input type="radio" class="btn-check" name="ageGroup" id="age26-35" value="26-35">
+                                            <label class="btn btn-outline-primary" for="age26-35">26-35</label>
+
+                                            <input type="radio" class="btn-check" name="ageGroup" id="age36-50" value="36-50">
+                                            <label class="btn btn-outline-primary" for="age36-50">36-50</label>
+
+                                            <input type="radio" class="btn-check" name="ageGroup" id="age51plus" value="51+">
+                                            <label class="btn btn-outline-primary" for="age51plus">51+</label>
+                                        </div>
+                                        <div class="invalid-feedback d-block" id="ageGroupError">
+                                            Please select your age group.
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Banking Experience Section -->
+                            <section class="border-start border-primary ps-3 mb-4">
+                                <h3 class="h5 text-primary mb-3">Banking Experience</h3>
+                                
+                                <div class="row g-3">
+                                    <!-- Customer Since -->
+                                    <div class="col-md-6">
+                                        <label for="customerSince" class="form-label">Customer Since *</label>
+                                        <select class="form-select" id="customerSince" name="customerSince" required>
+                                            <option value="">Select duration</option>
+                                            <option value="less-than-1">Less than 1 year</option>
+                                            <option value="1-3">1-3 years</option>
+                                            <option value="3-5">3-5 years</option>
+                                            <option value="5-10">5-10 years</option>
+                                            <option value="more-than-10">More than 10 years</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select how long you've been our customer.
+                                        </div>
+                                    </div>
+
+                                    <!-- Primary Banking Service -->
+                                    <div class="col-md-6">
+                                        <label for="primaryService" class="form-label">Primary Banking Service *</label>
+                                        <select class="form-select" id="primaryService" name="primaryService" required>
+                                            <option value="">Select service</option>
+                                            <option value="savings">Savings Account</option>
+                                            <option value="checking">Checking Account</option>
+                                            <option value="loans">Loans</option>
+                                            <option value="investments">Investments</option>
+                                            <option value="business">Business Banking</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select your primary banking service.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Services Used -->
+                                <div class="mt-3">
+                                    <label class="form-label">Which services do you use regularly? *</label>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="servicesUsed" value="online-banking" id="onlineBanking">
+                                                <label class="form-check-label" for="onlineBanking">Online Banking</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="servicesUsed" value="mobile-app" id="mobileApp">
+                                                <label class="form-check-label" for="mobileApp">Mobile App</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="servicesUsed" value="atm" id="atm">
+                                                <label class="form-check-label" for="atm">ATM Services</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="servicesUsed" value="branch" id="branch">
+                                                <label class="form-check-label" for="branch">Branch Services</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="servicesUsed" value="call-center" id="callCenter">
+                                                <label class="form-check-label" for="callCenter">Call Center</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="servicesUsed" value="none" id="noneServices">
+                                                <label class="form-check-label" for="noneServices">None</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="invalid-feedback d-block" id="servicesUsedError">
+                                        Please select at least one service you use.
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Satisfaction Ratings Section -->
+                            <section class="border-start border-primary ps-3 mb-4">
+                                <h3 class="h5 text-primary mb-3">Satisfaction Ratings</h3>
+                                
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Service Aspect</th>
+                                                <th class="text-center">Very Poor</th>
+                                                <th class="text-center">Poor</th>
+                                                <th class="text-center">Average</th>
+                                                <th class="text-center">Good</th>
+                                                <th class="text-center">Excellent</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- Customer Service -->
+                                            <tr>
+                                                <td>Customer Service *</td>
+                                                <td class="text-center">
+                                                    <input class="form-check-input" type="radio" name="customerService" value="1" required>
+                                                </td>
+                                                <td class="text-center">
+                                                    <input class="form-check-input" type="radio" name="customerService" value="2">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input class="form-check-input" type="radio" name="customerService" value="3">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input class="form-check-input" type="radio" name="customerService" value="4">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input class="form-check-input" type="radio" name="customerService" value="5">
+                                                </td>
+                                            </tr>
+                                            <!-- Online Banking -->
+                                            <tr>
+                                                <td>Online Banking *</td>
+                                                <td class="text-center">
+                                                    <input class="form-check-input" type="radio" name="onlineBanking" value="1" required>
+                                                </td>
+                                                <td class="text-center">
+                                                    <input class="form-check-input" type="radio" name="onlineBanking" value="2">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input class="form-check-input" type="radio" name="onlineBanking" value="3">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input class="form-check-input" type="radio" name="onlineBanking" value="4">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input class="form-check-input" type="radio" name="onlineBanking" value="5">
+                                                </td>
+                                            </tr>
+                                            <!-- Mobile App -->
+                                            <tr>
+                                                <td>Mobile App *</td>
+                                                <td class="text-center">
+                                                    <input class="form-check-input" type="radio" name="mobileApp" value="1" required>
+                                                </td>
+                                                <td class="text-center">
+                                                    <input class="form-check-input" type="radio" name="mobileApp" value="2">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input class="form-check-input" type="radio" name="mobileApp" value="3">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input class="form-check-input" type="radio" name="mobileApp" value="4">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input class="form-check-input" type="radio" name="mobileApp" value="5">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="invalid-feedback d-block" id="ratingsError">
+                                        Please rate all service aspects.
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Additional Feedback Section -->
+                            <section class="border-start border-primary ps-3 mb-4">
+                                <h3 class="h5 text-primary mb-3">Additional Feedback</h3>
+                                
+                                <!-- Likelihood to Recommend -->
+                                <div class="mb-3">
+                                    <label for="recommend" class="form-label">How likely are you to recommend SecureBank to others? *</label>
+                                    <input type="range" class="form-range" id="recommend" name="recommend" 
+                                           min="0" max="10" value="5" required>
+                                    <div class="d-flex justify-content-between">
+                                        <small>0 - Not at all likely</small>
+                                        <small>5 - Neutral</small>
+                                        <small>10 - Extremely likely</small>
+                                    </div>
+                                    <div class="text-center mt-2">
+                                        <span class="badge bg-primary fs-6" id="recommendValue">5</span>
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please indicate your likelihood to recommend us.
+                                    </div>
+                                </div>
+
+                                <!-- Security PIN -->
+                                <div class="mb-3">
+                                    <label for="securityPin" class="form-label">Security PIN *</label>
+                                    <input type="text" class="form-control" id="securityPin" name="securityPin" 
+                                           placeholder="Enter 6-digit PIN" maxlength="6" required>
+                                    <div class="form-text text-muted">
+                                        Must be exactly 6 digits, cannot be sequential (123456) or repetitive (111111)
+                                    </div>
+                                    <div class="invalid-feedback" id="securityPinError">
+                                        Please enter a valid 6-digit security PIN.
+                                    </div>
+                                </div>
+
+                                <!-- Comments -->
+                                <div class="mb-3">
+                                    <label for="comments" class="form-label">Additional Comments or Suggestions</label>
+                                    <textarea class="form-control" id="comments" name="comments" 
+                                              rows="4" placeholder="Please share any additional feedback or suggestions..."></textarea>
+                                    <div class="form-text text-muted">
+                                        Maximum 500 characters
+                                    </div>
+                                </div>
+
+                                <!-- Contact Preference -->
+                                <div class="mb-3">
+                                    <label class="form-label">Preferred Contact Method for Follow-up</label>
+                                    <div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="contactMethod" id="contactEmail" value="email" checked>
+                                            <label class="form-check-label" for="contactEmail">Email</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="contactMethod" id="contactPhone" value="phone">
+                                            <label class="form-check-label" for="contactPhone">Phone</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="contactMethod" id="contactSMS" value="sms">
+                                            <label class="form-check-label" for="contactSMS">SMS</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="contactMethod" id="contactNone" value="none">
+                                            <label class="form-check-label" for="contactNone">No Follow-up</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Submit Section -->
+                            <section class="mt-5">
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" id="consent" name="consent" required>
+                                    <label class="form-check-label" for="consent">
+                                        I consent to the collection and processing of my personal data for the purpose of improving services. *
+                                    </label>
+                                    <div class="invalid-feedback">
+                                        You must agree before submitting.
+                                    </div>
+                                </div>
+
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <button type="reset" class="btn btn-outline-secondary me-md-2">Reset Form</button>
+                                    <!-- Button trigger modal (Bootstrap Interactive Component #2) -->
+                                    <button type="button" class="btn btn-primary" id="submitBtn" data-bs-toggle="modal" data-bs-target="#confirmationModal">
+                                        Submit Feedback
+                                    </button>
+                                </div>
+                            </section>
+                        </form>
+
+                        <!-- Success Message (Hidden by default) -->
+                        <div id="successMessage" class="alert alert-success mt-4 d-none">
+                            <h4 class="alert-heading"><i class="bi bi-check-circle-fill me-2"></i>Thank You!</h4>
+                            <p class="mb-0">Your feedback has been submitted successfully. We appreciate you taking the time to help us improve our services.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Confirmation Modal (Bootstrap Interactive Component #2) -->
+    <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmationModalLabel">Confirm Submission</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to submit your feedback? This action cannot be undone.</p>
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle me-2"></i>
+                        Your responses will help us improve our services.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="confirmSubmit">Submit Feedback</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Component (Bootstrap Interactive Component #3 - Bonus) -->
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+        <div id="successToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-success text-white">
+                <i class="bi bi-check-circle-fill me-2"></i>
+                <strong class="me-auto">Success</strong>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Your feedback has been submitted successfully!
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>&copy; 2025 SecureBank. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="text-white text-decoration-none me-3">Privacy Policy</a>
+                    <a href="#" class="text-white text-decoration-none">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- JavaScript for Advanced Form Validation -->
+    <script>
+        /**
+         * CUSTOM JAVASCRIPT VALIDATION FOR FEEDBACK FORM
+         * This script implements advanced validation patterns for form controls
+         * using Bootstrap's validation system
+         */
+
+        // =============================================
+        // UTILITY FUNCTIONS
+        // =============================================
+
+        /**
+         * Shows custom error message for a specific field using Bootstrap validation
+         * @param {string} fieldId - The ID of the form field
+         * @param {string} message - The error message to display
+         */
+        function showFieldError(fieldId, message) {
+            const field = document.getElementById(fieldId);
+            const errorElement = document.getElementById(fieldId + 'Error');
+            
+            field.classList.add('is-invalid');
+            if (errorElement) {
+                errorElement.textContent = message;
+            }
+        }
+
+        /**
+         * Clears error message for a specific field using Bootstrap validation
+         * @param {string} fieldId - The ID of the form field
+         */
+        function clearFieldError(fieldId) {
+            const field = document.getElementById(fieldId);
+            field.classList.remove('is-invalid');
+            field.classList.add('is-valid');
+        }
+
+        /**
+         * Validates if a string contains only letters and spaces
+         * @param {string} str - The string to validate
+         * @returns {boolean} - True if valid, false otherwise
+         */
+        function isValidName(str) {
+            // Advanced pattern: Only letters, spaces, hyphens, and apostrophes allowed
+            // Minimum 2 characters, maximum 50 characters
+            const namePattern = /^[A-Za-z\u00C0-\u024F\u0400-\u04FF'][A-Za-z\u00C0-\u024F\u0400-\u04FF' -]{1,49}$/;
+            return namePattern.test(str) && str.length >= 2 && str.length <= 50;
+        }
+
+        /**
+         * Validates Omani phone number format
+         * @param {string} phone - The phone number to validate
+         * @returns {boolean} - True if valid, false otherwise
+         */
+        function isValidOmaniPhone(phone) {
+            // Advanced pattern: Omani phone numbers start with +968 followed by 8 digits
+            const phonePattern = /^\+968\s?\d{8}$/;
+            return phonePattern.test(phone);
+        }
+
+        /**
+         * Validates security PIN with advanced rules
+         * @param {string} pin - The PIN to validate
+         * @returns {boolean} - True if valid, false otherwise
+         */
+        function isValidSecurityPin(pin) {
+            // Must be exactly 6 digits
+            if (!/^\d{6}$/.test(pin)) return false;
+            
+            // Advanced validation rules:
+            
+            // Rule 1: Cannot be sequential (e.g., 123456, 456789)
+            const isSequential = () => {
+                for (let i = 0; i < pin.length - 1; i++) {
+                    if (parseInt(pin[i]) + 1 !== parseInt(pin[i + 1])) {
+                        return false;
+                    }
+                }
+                return true;
+            };
+            
+            // Rule 2: Cannot be repetitive (e.g., 111111, 222222)
+            const isRepetitive = () => {
+                return new Set(pin.split('')).size === 1;
+            };
+            
+            // Rule 3: Cannot be a common pattern (e.g., 112233, 121212)
+            const isCommonPattern = () => {
+                const commonPatterns = ['112233', '123123', '111222', '121212', '123321'];
+                return commonPatterns.includes(pin);
+            };
+            
+            // Rule 4: At least 3 different digits
+            const hasSufficientVariety = () => {
+                return new Set(pin.split('')).size >= 3;
+            };
+            
+            return !isSequential() && !isRepetitive() && !isCommonPattern() && hasSufficientVariety();
+        }
+
+        // =============================================
+        // FIELD-SPECIFIC VALIDATION FUNCTIONS
+        // =============================================
+
+        /**
+         * Validates full name field with advanced pattern
+         */
+        function validateFullName() {
+            const fullName = document.getElementById('fullName').value.trim();
+            
+            if (!fullName) {
+                showFieldError('fullName', 'Full name is required.');
+                return false;
+            }
+            
+            if (!isValidName(fullName)) {
+                showFieldError('fullName', 'Please enter a valid full name (2-50 characters, letters and spaces only).');
+                return false;
+            }
+            
+            clearFieldError('fullName');
+            return true;
+        }
+
+        /**
+         * Validates email field with advanced pattern
+         */
+        function validateEmail() {
+            const email = document.getElementById('email').value.trim();
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            
+            if (!email) {
+                showFieldError('email', 'Email address is required.');
+                return false;
+            }
+            
+            if (!emailPattern.test(email)) {
+                showFieldError('email', 'Please enter a valid email address (e.g., name@domain.com).');
+                return false;
+            }
+            
+            // Additional check for common email providers
+            const commonDomains = ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'aol.com'];
+            const domain = email.split('@')[1];
+            if (!commonDomains.includes(domain) && !domain.endsWith('.com') && !domain.endsWith('.net') && !domain.endsWith('.org')) {
+                showFieldError('email', 'Please use a valid email domain.');
+                return false;
+            }
+            
+            clearFieldError('email');
+            return true;
+        }
+
+        /**
+         * Validates phone number with Omani format
+         */
+        function validatePhone() {
+            const phone = document.getElementById('phone').value.trim();
+            
+            if (!phone) {
+                showFieldError('phone', 'Phone number is required.');
+                return false;
+            }
+            
+            if (!isValidOmaniPhone(phone)) {
+                showFieldError('phone', 'Please enter a valid Omani phone number (format: +968 XXXXXXXX).');
+                return false;
+            }
+            
+            clearFieldError('phone');
+            return true;
+        }
+
+        /**
+         * Validates age group selection
+         */
+        function validateAgeGroup() {
+            const ageGroupSelected = document.querySelector('input[name="ageGroup"]:checked');
+            
+            if (!ageGroupSelected) {
+                document.getElementById('ageGroupError').style.display = 'block';
+                return false;
+            }
+            
+            document.getElementById('ageGroupError').style.display = 'none';
+            return true;
+        }
+
+        /**
+         * Validates services used checkboxes
+         */
+        function validateServicesUsed() {
+            const servicesUsed = document.querySelectorAll('input[name="servicesUsed"]:checked');
+            
+            if (servicesUsed.length === 0) {
+                document.getElementById('servicesUsedError').style.display = 'block';
+                return false;
+            }
+            
+            document.getElementById('servicesUsedError').style.display = 'none';
+            return true;
+        }
+
+        /**
+         * Validates satisfaction ratings
+         */
+        function validateRatings() {
+            const ratings = ['customerService', 'onlineBanking', 'mobileApp'];
+            let allRated = true;
+            
+            ratings.forEach(rating => {
+                if (!document.querySelector(`input[name="${rating}"]:checked`)) {
+                    allRated = false;
+                }
+            });
+            
+            if (!allRated) {
+                document.getElementById('ratingsError').style.display = 'block';
+                return false;
+            }
+            
+            document.getElementById('ratingsError').style.display = 'none';
+            return true;
+        }
+
+        /**
+         * Validates security PIN with advanced rules
+         */
+        function validateSecurityPin() {
+            const pin = document.getElementById('securityPin').value.trim();
+            
+            if (!pin) {
+                showFieldError('securityPin', 'Security PIN is required.');
+                return false;
+            }
+            
+            if (!isValidSecurityPin(pin)) {
+                showFieldError('securityPin', 'PIN must be 6 digits, not sequential, not repetitive, and have at least 3 different digits.');
+                return false;
+            }
+            
+            clearFieldError('securityPin');
+            return true;
+        }
+
+        /**
+         * Validates the entire form before submission
+         */
+        function validateForm() {
+            const isFullNameValid = validateFullName();
+            const isEmailValid = validateEmail();
+            const isPhoneValid = validatePhone();
+            const isAgeGroupValid = validateAgeGroup();
+            const isServicesUsedValid = validateServicesUsed();
+            const isRatingsValid = validateRatings();
+            const isSecurityPinValid = validateSecurityPin();
+            
+            return isFullNameValid && isEmailValid && isPhoneValid && isAgeGroupValid && 
+                   isServicesUsedValid && isRatingsValid && isSecurityPinValid;
+        }
+
+        // =============================================
+        // EVENT LISTENERS AND INITIALIZATION
+        // =============================================
+
+        /**
+         * Initialize event listeners when the page loads
+         */
+        function initializeEventListeners() {
+            const form = document.getElementById('feedbackForm');
+            
+            // Real-time validation for key fields
+            document.getElementById('fullName').addEventListener('blur', validateFullName);
+            document.getElementById('email').addEventListener('blur', validateEmail);
+            document.getElementById('phone').addEventListener('blur', validatePhone);
+            document.getElementById('securityPin').addEventListener('blur', validateSecurityPin);
+            
+            // Age group validation
+            const ageGroupInputs = document.querySelectorAll('input[name="ageGroup"]');
+            ageGroupInputs.forEach(input => {
+                input.addEventListener('change', validateAgeGroup);
+            });
+            
+            // Services used validation
+            const servicesInputs = document.querySelectorAll('input[name="servicesUsed"]');
+            servicesInputs.forEach(input => {
+                input.addEventListener('change', validateServicesUsed);
+            });
+            
+            // Ratings validation
+            const ratingInputs = document.querySelectorAll('input[type="radio"][name^="customerService"], input[type="radio"][name^="onlineBanking"], input[type="radio"][name^="mobileApp"]');
+            ratingInputs.forEach(input => {
+                input.addEventListener('change', validateRatings);
+            });
+            
+            // Recommend slider value display
+            const recommendSlider = document.getElementById('recommend');
+            const recommendValue = document.getElementById('recommendValue');
+            recommendSlider.addEventListener('input', function() {
+                recommendValue.textContent = this.value;
+            });
+            
+            // Submit button click handler - show validation before modal
+            document.getElementById('submitBtn').addEventListener('click', function() {
+                if (!validateForm()) {
+                    // Show alert if form is invalid
+                    document.getElementById('formAlert').classList.remove('d-none');
+                    
+                    // Scroll to first error
+                    const firstError = document.querySelector('.is-invalid');
+                    if (firstError) {
+                        firstError.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                    }
+                } else {
+                    // Hide alert if form is valid
+                    document.getElementById('formAlert').classList.add('d-none');
+                }
+            });
+            
+            // Modal confirmation button
+            document.getElementById('confirmSubmit').addEventListener('click', function() {
+                // Final validation check
+                if (validateForm()) {
+                    // Show success message
+                    document.getElementById('successMessage').classList.remove('d-none');
+                    
+                    // Show toast notification
+                    const successToast = new bootstrap.Toast(document.getElementById('successToast'));
+                    successToast.show();
+                    
+                    // Hide modal
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('confirmationModal'));
+                    modal.hide();
+                    
+                    // Scroll to success message
+                    document.getElementById('successMessage').scrollIntoView({ 
+                        behavior: 'smooth' 
+                    });
+                    
+                    // Reset form after 5 seconds
+                    setTimeout(() => {
+                        form.reset();
+                        document.getElementById('successMessage').classList.add('d-none');
+                        recommendValue.textContent = '5'; // Reset slider value display
+                        
+                        // Clear validation states
+                        const validatedFields = document.querySelectorAll('.is-valid, .is-invalid');
+                        validatedFields.forEach(field => {
+                            field.classList.remove('is-valid', 'is-invalid');
+                        });
+                    }, 5000);
+                }
+            });
+            
+            // Form reset handler
+            form.addEventListener('reset', function() {
+                // Clear all error messages
+                const errorElements = document.querySelectorAll('.invalid-feedback');
+                errorElements.forEach(element => {
+                    element.style.display = 'none';
+                });
+                
+                const validatedFields = document.querySelectorAll('.is-valid, .is-invalid');
+                validatedFields.forEach(field => {
+                    field.classList.remove('is-valid', 'is-invalid');
+                });
+                
+                // Reset slider value display
+                document.getElementById('recommendValue').textContent = '5';
+                
+                // Hide alert
+                document.getElementById('formAlert').classList.add('d-none');
+            });
+        }
+
+        // Initialize when the page loads
+        document.addEventListener('DOMContentLoaded', initializeEventListeners);
+    </script>
+</body>
+</html>

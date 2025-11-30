@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banking Adventure - SecureBank</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body class="bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="images/logo.png" alt="Bank Logo" width="40" height="40" class="d-inline-block align-text-top me-2">
+                SecureBank
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="accounts.html">Accounts</a></li>
+                    <li class="nav-item"><a class="nav-link" href="transfers.html">Transfers</a></li>
+                    <li class="nav-item"><a class="nav-link" href="loans.html">Loans</a></li>
+                    <li class="nav-item"><a class="nav-link" href="support.html">Support</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="questionnaire.html">Feedback</a></li>
+                    <li class="nav-item"><a class="nav-link" href="calculator.html">Calculator</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="funpage.html">Fun & Games</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="min-vh-100 text-white">
+        <div class="container py-5">
+            <!-- Game Header -->
+            <div class="text-center mb-5">
+                <h1 class="display-4 fw-bold mb-3">
+                    <i class="bi bi-piggy-bank me-3"></i>
+                    Budget Builder Adventure
+                </h1>
+                <p class="lead mb-4">
+                    Learn financial literacy by creating the perfect monthly budget! Drag expenses to the correct budget categories.
+                </p>
+                
+                <!-- Game Stats -->
+                <div class="row justify-content-center mb-4">
+                    <div class="col-md-8">
+                        <div class="bg-white bg-opacity-10 rounded p-4">
+                            <div class="row text-center">
+                                <div class="col-4">
+                                    <h3 class="fw-bold text-warning" id="budgetAmount">2,000 OMR</h3>
+                                    <small>Monthly Budget</small>
+                                </div>
+                                <div class="col-4">
+                                    <h3 class="fw-bold text-success" id="remainingBudget">2,000 OMR</h3>
+                                    <small>Remaining</small>
+                                </div>
+                                <div class="col-4">
+                                    <h3 class="fw-bold text-info" id="score">0</h3>
+                                    <small>Points</small>
+                                </div>
+                            </div>
+                            <!-- Budget Progress Bar -->
+                            <div class="progress mt-3" style="height: 20px;">
+                                <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" 
+                                     id="budgetProgress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                    0% Used
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <!-- Available Expenses -->
+                <div class="col-lg-4">
+                    <div class="bg-white bg-opacity-10 rounded p-4 h-100">
+                        <h3 class="h4 mb-4">
+                            <i class="bi bi-wallet2 me-2"></i>Your Expenses
+                        </h3>
+                        <p class="mb-3">Drag these expenses to the correct budget categories:</p>
+                        
+                        <div id="availableExpenses" class="d-flex flex-wrap gap-2">
+                            <!-- Expenses will be dynamically generated -->
+                        </div>
+
+                        <!-- Game Controls -->
+                        <div class="mt-4">
+                            <button class="btn btn-warning btn-lg w-100 mb-2" onclick="startNewGame()">
+                                <i class="bi bi-arrow-clockwise me-2"></i>New Game
+                            </button>
+                            <button class="btn btn-outline-light btn-sm w-100" onclick="showHint()">
+                                <i class="bi bi-lightbulb me-1"></i>Need Help?
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Budget Categories -->
+                <div class="col-lg-8">
+                    <div class="bg-white bg-opacity-10 rounded p-4">
+                        <h3 class="h4 mb-4">
+                            <i class="bi bi-pie-chart me-2"></i>Budget Categories
+                        </h3>
+                        
+                        <div class="row g-3" id="budgetCategories">
+                            <!-- Categories will be dynamically generated -->
+                        </div>
+
+                        <!-- Game Instructions -->
+                        <div class="mt-4 p-3 bg-dark bg-opacity-50 rounded">
+                            <h5 class="mb-2"><i class="bi bi-info-circle me-2"></i>How to Play:</h5>
+                            <ul class="small mb-0">
+                                <li>Drag expenses from the left to the correct budget categories</li>
+                                <li>Try to stay within your monthly budget of 2,000 OMR</li>
+                                <li>Learn about proper budget allocation percentages</li>
+                                <li>Earn points for correct placements and staying within budget</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Completion Message -->
+            <div id="completionMessage" class="bg-white bg-opacity-10 rounded p-5 text-center mt-4 d-none">
+                <h2 class="text-success mb-3">
+                    <i class="bi bi-trophy-fill me-2"></i>Congratulations!
+                </h2>
+                <p class="lead mb-3">You've successfully created a balanced budget!</p>
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <div class="bg-dark bg-opacity-50 p-3 rounded">
+                            <h5>Your Budget Summary:</h5>
+                            <div id="budgetSummary"></div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-success btn-lg mt-3" onclick="startNewGame()">
+                    <i class="bi bi-play-circle me-2"></i>Play Again
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>&copy; 2025 SecureBank. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="text-white text-decoration-none me-3">Privacy Policy</a>
+                    <a href="#" class="text-white text-decoration-none">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- JavaScript for Budget Builder Game -->
+    <script>
+        /**
+         * BUDGET BUILDER ADVENTURE GAME
+         * An interactive financial literacy game that teaches budget management
+         * Features drag-and-drop functionality, dynamic HTML, and educational content
+         */
+
+        // =============================================
+        // GAME CONFIGURATION AND DATA
+        // =============================================
+
+        /**
+         * Game configuration constants
+         * Defines budget limits, scoring rules, and ideal budget percentages
+         */
+        const GAME_CONFIG = {
+            totalBudget: 2000, // Monthly budget in OMR
+            idealPercentages: {
+                housing: 30,      // 30% for housing
+                transportation: 15, // 15% for transportation
+                food: 12,         // 12% for food
+                utilities: 10,    // 10% for utilities
+                savings: 20,      // 20% for savings
+                entertainment: 8, // 8% for entertainment
+                other: 5          // 5% for other expenses
+            },
+            pointValues: {
+                correctCategory: 10,
+                withinBudget: 25,
+                idealPercentage: 15,
+                perfectBudget: 50
+            }
+        };
+
+        /**
+         * Expense items with their typical categories and costs
+         * Each expense has an ID, name, amount, category, and description
+         */
+        const EXPENSE_ITEMS = [
+            { id: 1, name: "Rent", amount: 600, category: "housing", description: "Monthly apartment rent" },
+            { id: 2, name: "Car Payment", amount: 300, category: "transportation", description: "Vehicle installment" },
+            { id: 3, name: "Groceries", amount: 240, category: "food", description: "Weekly food shopping" },
+            { id: 4, name: "Electricity", amount: 50, category: "utilities", description: "Monthly electricity bill" },
+            { id: 5, name: "Water", amount: 30, category: "utilities", description: "Monthly water bill" },
+            { id: 6, name: "Internet", amount: 40, category: "utilities", description: "Monthly internet service" },
+            { id: 7, name: "Fuel", amount: 120, category: "transportation", description: "Monthly gasoline costs" },
+            { id: 8, name: "Dining Out", amount: 160, category: "food", description: "Restaurants and cafes" },
+            { id: 9, name: "Savings Deposit", amount: 400, category: "savings", description: "Monthly savings contribution" },
+            { id: 10, name: "Movies", amount: 40, category: "entertainment", description: "Cinema and streaming" },
+            { id: 11, name: "Gym Membership", amount: 30, category: "entertainment", description: "Fitness center fee" },
+            { id: 12, name: "Shopping", amount: 100, category: "other", description: "Clothing and personal items" },
+            { id: 13, name: "Mobile Phone", amount: 25, category: "utilities", description: "Monthly mobile plan" },
+            { id: 14, name: "Insurance", amount: 80, category: "other", description: "Various insurance premiums" }
+        ];
+
+        /**
+         * Budget categories with their ideal percentages and descriptions
+         * Each category has an ID, name, color, description, and ideal percentage
+         */
+        const BUDGET_CATEGORIES = [
+            { 
+                id: "housing", 
+                name: "🏠 Housing", 
+                color: "bg-primary",
+                description: "Rent, mortgage, property taxes, home insurance",
+                idealPercentage: 30
+            },
+            { 
+                id: "transportation", 
+                name: "🚗 Transportation", 
+                color: "bg-success",
+                description: "Car payments, fuel, maintenance, public transport",
+                idealPercentage: 15
+            },
+            { 
+                id: "food", 
+                name: "🍎 Food", 
+                color: "bg-warning",
+                description: "Groceries, dining out, coffee shops",
+                idealPercentage: 12
+            },
+            { 
+                id: "utilities", 
+                name: "⚡ Utilities", 
+                color: "bg-info",
+                description: "Electricity, water, internet, mobile phone",
+                idealPercentage: 10
+            },
+            { 
+                id: "savings", 
+                name: "💰 Savings", 
+                color: "bg-dark",
+                description: "Emergency fund, investments, retirement",
+                idealPercentage: 20
+            },
+            { 
+                id: "entertainment", 
+                name: "🎬 Entertainment", 
+                color: "bg-purple",
+                description: "Movies, hobbies, gym, subscriptions",
+                idealPercentage: 8
+            },
+            { 
+                id: "other", 
+                name: "📦 Other", 
+                color: "bg-secondary",
+                description: "Shopping, insurance, personal care",
+                idealPercentage: 5
+            }
+        ];
+
+        // =============================================
+        // GAME STATE VARIABLES
+        // =============================================
+
+        /**
+         * Current game state tracking
+         * Tracks score, remaining budget, placed expenses, and category totals
+         */
+        let gameState = {
+            score: 0,
+            remainingBudget: GAME_CONFIG.totalBudget,
+            placedExpenses: [],
+            categoryTotals: {},
+            draggedItem: null
+        };
+
+        // =============================================
+        // INITIALIZATION FUNCTIONS
+        // =============================================
+
+        /**
+         * Initialize the game when the page loads
+         * Sets up the game board and event listeners
+         */
+        function initializeGame() {
+            // Initialize category totals to zero
+            BUDGET_CATEGORIES.forEach(category => {
+                gameState.categoryTotals[category.id] = 0;
+            });
+
+            // Create expense items and budget categories
+            renderExpenseItems();
+            renderBudgetCategories();
+            
+            // Set up drag and drop functionality
+            initializeDragAndDrop();
+            
+            // Update the game display with initial values
+            updateGameDisplay();
+        }
+
+        /**
+         * Render available expense items dynamically
+         * Creates draggable expense elements from the EXPENSE_ITEMS array
+         */
+        function renderExpenseItems() {
+            const container = document.getElementById('availableExpenses');
+            container.innerHTML = ''; // Clear existing content
+
+            // Create each expense item as a draggable card
+            EXPENSE_ITEMS.forEach(expense => {
+                const expenseElement = document.createElement('div');
+                expenseElement.className = 'bg-light text-dark p-3 rounded border';
+                expenseElement.draggable = true;
+                expenseElement.dataset.id = expense.id;
+                expenseElement.dataset.amount = expense.amount;
+                expenseElement.dataset.category = expense.category;
+                
+                expenseElement.innerHTML = `
+                    <div class="text-center">
+                        <div class="fw-bold">${expense.name}</div>
+                        <div class="text-success fw-bold">${expense.amount} OMR</div>
+                        <small class="text-muted">${expense.description}</small>
+                    </div>
+                `;
+
+                container.appendChild(expenseElement);
+            });
+        }
+
+        /**
+         * Render budget categories dynamically
+         * Creates drop zones for each budget category
+         */
+        function renderBudgetCategories() {
+            const container = document.getElementById('budgetCategories');
+            container.innerHTML = ''; // Clear existing content
+
+            // Create each budget category as a drop zone
+            BUDGET_CATEGORIES.forEach(category => {
+                const categoryElement = document.createElement('div');
+                categoryElement.className = 'col-md-6 col-lg-4';
+                categoryElement.innerHTML = `
+                    <div class="border border-2 p-3 ${category.color} bg-opacity-25 rounded" 
+                         data-category="${category.id}"
+                         style="min-height: 200px; border-style: dashed !important;">
+                        <h6 class="fw-bold mb-2">${category.name}</h6>
+                        <small class="d-block mb-2">Ideal: ${category.idealPercentage}% 
+                            (${Math.round(GAME_CONFIG.totalBudget * category.idealPercentage / 100)} OMR)</small>
+                        <div class="category-expenses" id="expenses-${category.id}">
+                            <!-- Expenses will be placed here -->
+                        </div>
+                        <div class="mt-2 small">
+                            <strong>Total: <span id="total-${category.id}">0</span> OMR</strong>
+                            <br>
+                            <span id="percentage-${category.id}">0%</span> of budget
+                        </div>
+                    </div>
+                `;
+
+                container.appendChild(categoryElement);
+            });
+        }
+
+        // =============================================
+        // DRAG AND DROP FUNCTIONALITY (Point 5a)
+        // =============================================
+
+        /**
+         * Initialize drag and drop event listeners
+         * Sets up all the event handlers for drag and drop functionality
+         */
+        function initializeDragAndDrop() {
+            // Drag start event for expense items
+            document.addEventListener('dragstart', function(e) {
+                if (e.target.classList.contains('bg-light') && !e.target.classList.contains('opacity-50')) {
+                    gameState.draggedItem = e.target;
+                    e.target.style.opacity = '0.5';
+                }
+            });
+
+            // Drag end event
+            document.addEventListener('dragend', function(e) {
+                if (e.target.classList.contains('bg-light')) {
+                    e.target.style.opacity = '1';
+                    gameState.draggedItem = null;
+                }
+            });
+
+            // Drag over event for categories
+            document.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                const category = e.target.closest('[data-category]');
+                if (category) {
+                    category.style.borderColor = '#20c997';
+                    category.style.backgroundColor = 'rgba(32, 201, 151, 0.1)';
+                }
+            });
+
+            // Drag leave event for categories
+            document.addEventListener('dragleave', function(e) {
+                const category = e.target.closest('[data-category]');
+                if (category) {
+                    category.style.borderColor = '';
+                    category.style.backgroundColor = '';
+                }
+            });
+
+            // Drop event for categories
+            document.addEventListener('drop', function(e) {
+                e.preventDefault();
+                const category = e.target.closest('[data-category]');
+                if (category && gameState.draggedItem) {
+                    category.style.borderColor = '';
+                    category.style.backgroundColor = '';
+                    handleExpenseDrop(category, gameState.draggedItem);
+                }
+            });
+        }
+
+        /**
+         * Handle when an expense is dropped into a category
+         * Validates the drop and processes the expense placement
+         */
+        function handleExpenseDrop(categoryElement, expenseElement) {
+            const categoryId = categoryElement.dataset.category;
+            const expenseId = parseInt(expenseElement.dataset.id);
+            const expenseAmount = parseInt(expenseElement.dataset.amount);
+            const correctCategory = expenseElement.dataset.category;
+
+            // Check if expense is already placed
+            if (expenseElement.style.opacity === '0.7') {
+                return;
+            }
+
+            // Check if budget allows this expense
+            if (expenseAmount > gameState.remainingBudget) {
+                showMessage('❌ Budget exceeded! Remove some expenses first.', 'danger');
+                return;
+            }
+
+            // Place the expense in the category
+            placeExpenseInCategory(categoryId, expenseElement, expenseAmount, correctCategory);
+        }
+
+        /**
+         * Place an expense item into a budget category
+         * Updates game state and creates the placed expense element
+         */
+        function placeExpenseInCategory(categoryId, expenseElement, amount, correctCategory) {
+            const categoryContainer = document.getElementById(`expenses-${categoryId}`);
+            
+            // Create a new element for the placed expense
+            const placedExpense = expenseElement.cloneNode(true);
+            placedExpense.style.opacity = '0.7';
+            placedExpense.draggable = false;
+            
+            // Add remove button
+            const removeBtn = document.createElement('button');
+            removeBtn.className = 'btn btn-sm btn-outline-danger mt-2 w-100';
+            removeBtn.innerHTML = '<i class="bi bi-x-circle"></i> Remove';
+            removeBtn.onclick = function() {
+                removeExpenseFromCategory(categoryId, placedExpense, amount);
+            };
+            
+            placedExpense.appendChild(removeBtn);
+            categoryContainer.appendChild(placedExpense);
+
+            // Update game state
+            gameState.placedExpenses.push({
+                id: parseInt(expenseElement.dataset.id),
+                category: categoryId,
+                amount: amount,
+                element: placedExpense
+            });
+
+            // Update category total and remaining budget
+            gameState.categoryTotals[categoryId] += amount;
+            gameState.remainingBudget -= amount;
+
+            // Calculate points and update display
+            calculatePoints(categoryId, amount, correctCategory);
+            updateGameDisplay();
+            checkGameCompletion();
+
+            // Remove the original expense element
+            expenseElement.remove();
+        }
+
+        /**
+         * Remove an expense from a category
+         * Updates game state and removes the expense element
+         */
+        function removeExpenseFromCategory(categoryId, expenseElement, amount) {
+            // Remove from game state
+            gameState.placedExpenses = gameState.placedExpenses.filter(
+                expense => expense.element !== expenseElement
+            );
+
+            // Update category total and remaining budget
+            gameState.categoryTotals[categoryId] -= amount;
+            gameState.remainingBudget += amount;
+
+            // Remove the element
+            expenseElement.remove();
+
+            // Update display
+            updateGameDisplay();
+        }
+
+        // =============================================
+        // GAME LOGIC AND SCORING
+        // =============================================
+
+        /**
+         * Calculate points based on placement and budget
+         * Awards points for correct category placement and budget management
+         */
+        function calculatePoints(categoryId, amount, correctCategory) {
+            let pointsEarned = 0;
+
+            // Points for correct category placement
+            if (categoryId === correctCategory) {
+                pointsEarned += GAME_CONFIG.pointValues.correctCategory;
+                showMessage(`✅ Correct category! +${GAME_CONFIG.pointValues.correctCategory} points`, 'success');
+            } else {
+                showMessage(`❌ This expense belongs in ${getCategoryName(correctCategory)}`, 'warning');
+            }
+
+            // Points for staying within budget
+            if (gameState.remainingBudget >= 0) {
+                pointsEarned += GAME_CONFIG.pointValues.withinBudget;
+            }
+
+            // Points for ideal percentage allocation
+            const categoryPercentage = (gameState.categoryTotals[categoryId] / GAME_CONFIG.totalBudget) * 100;
+            const idealPercentage = GAME_CONFIG.idealPercentages[categoryId];
+            const percentageDifference = Math.abs(categoryPercentage - idealPercentage);
+
+            if (percentageDifference <= 5) {
+                pointsEarned += GAME_CONFIG.pointValues.idealPercentage;
+            }
+
+            // Add points to total score
+            gameState.score += pointsEarned;
+        }
+
+        /**
+         * Check if the game is completed
+         * Game completes when 80% or more of budget is used
+         */
+        function checkGameCompletion() {
+            const totalPlaced = gameState.placedExpenses.reduce((sum, expense) => sum + expense.amount, 0);
+            const budgetUsed = (totalPlaced / GAME_CONFIG.totalBudget) * 100;
+
+            // Game is complete when 80% or more of budget is used
+            if (budgetUsed >= 80) {
+                completeGame();
+            }
+        }
+
+        /**
+         * Handle game completion
+         * Shows completion message and calculates final score
+         */
+        function completeGame() {
+            // Calculate final score bonus
+            const budgetAccuracy = Math.max(0, 100 - Math.abs(100 - (gameState.remainingBudget / GAME_CONFIG.totalBudget * 100)));
+            const finalBonus = Math.round(budgetAccuracy * 2);
+            gameState.score += finalBonus;
+
+            // Show completion message
+            document.getElementById('completionMessage').style.display = 'block';
+            
+            // Generate budget summary
+            generateBudgetSummary();
+            
+            // Update final score
+            updateGameDisplay();
+            
+            // Celebration message
+            showMessage(`🎉 Perfect! Budget completed with ${finalBonus} bonus points!`, 'success');
+        }
+
+        /**
+         * Generate budget summary for completion screen
+         * Shows performance for each budget category
+         */
+        function generateBudgetSummary() {
+            const summaryContainer = document.getElementById('budgetSummary');
+            let summaryHTML = '';
+
+            BUDGET_CATEGORIES.forEach(category => {
+                const total = gameState.categoryTotals[category.id];
+                const percentage = (total / GAME_CONFIG.totalBudget) * 100;
+                const idealPercentage = category.idealPercentage;
+                const difference = Math.abs(percentage - idealPercentage);
+                
+                let rating = '👍 Good';
+                if (difference <= 5) rating = '🎯 Excellent';
+                if (difference > 10) rating = '⚠️ Needs work';
+
+                summaryHTML += `
+                    <div class="d-flex justify-content-between border-bottom py-1">
+                        <span>${category.name}:</span>
+                        <span>${total} OMR (${percentage.toFixed(1)}%) - ${rating}</span>
+                    </div>
+                `;
+            });
+
+            summaryHTML += `
+                <div class="d-flex justify-content-between pt-2 fw-bold">
+                    <span>Final Score:</span>
+                    <span class="text-warning">${gameState.score} points</span>
+                </div>
+            `;
+
+            summaryContainer.innerHTML = summaryHTML;
+        }
+
+        // =============================================
+        // UTILITY FUNCTIONS
+        // =============================================
+
+        /**
+         * Update the game display with current values
+         * Updates all dynamic elements on the page
+         */
+        function updateGameDisplay() {
+            // Update budget amounts
+            document.getElementById('remainingBudget').textContent = gameState.remainingBudget + ' OMR';
+            document.getElementById('score').textContent = gameState.score;
+
+            // Update budget progress bar
+            const usedBudget = GAME_CONFIG.totalBudget - gameState.remainingBudget;
+            const usedPercentage = (usedBudget / GAME_CONFIG.totalBudget) * 100;
+            const progressBar = document.getElementById('budgetProgress');
+            progressBar.style.width = usedPercentage + '%';
+            progressBar.textContent = Math.round(usedPercentage) + '% Used';
+
+            // Update category totals and percentages
+            BUDGET_CATEGORIES.forEach(category => {
+                const totalElement = document.getElementById(`total-${category.id}`);
+                const percentageElement = document.getElementById(`percentage-${category.id}`);
+                
+                if (totalElement && percentageElement) {
+                    const total = gameState.categoryTotals[category.id];
+                    const percentage = (total / GAME_CONFIG.totalBudget) * 100;
+                    
+                    totalElement.textContent = total;
+                    percentageElement.textContent = percentage.toFixed(1) + '%';
+
+                    // Color code based on ideal percentage
+                    const idealPercentage = category.idealPercentage;
+                    if (Math.abs(percentage - idealPercentage) <= 5) {
+                        percentageElement.className = 'text-success';
+                    } else if (Math.abs(percentage - idealPercentage) <= 10) {
+                        percentageElement.className = 'text-warning';
+                    } else {
+                        percentageElement.className = 'text-danger';
+                    }
+                }
+            });
+        }
+
+        /**
+         * Get category name by ID
+         * Helper function to get display name from category ID
+         */
+        function getCategoryName(categoryId) {
+            const category = BUDGET_CATEGORIES.find(cat => cat.id === categoryId);
+            return category ? category.name : 'Unknown';
+        }
+
+        /**
+         * Show message to user
+         * Displays temporary feedback messages
+         */
+        function showMessage(message, type) {
+            // Create temporary message element
+            const messageElement = document.createElement('div');
+            messageElement.className = `alert alert-${type} position-fixed`;
+            messageElement.style.top = '20px';
+            messageElement.style.right = '20px';
+            messageElement.style.zIndex = '1000';
+            messageElement.style.minWidth = '300px';
+            messageElement.textContent = message;
+
+            document.body.appendChild(messageElement);
+
+            // Remove after 3 seconds
+            setTimeout(() => {
+                messageElement.remove();
+            }, 3000);
+        }
+
+        /**
+         * Start a new game
+         * Resets all game state and UI elements
+         */
+        function startNewGame() {
+            // Reset game state
+            gameState = {
+                score: 0,
+                remainingBudget: GAME_CONFIG.totalBudget,
+                placedExpenses: [],
+                categoryTotals: {},
+                draggedItem: null
+            };
+
+            // Initialize category totals
+            BUDGET_CATEGORIES.forEach(category => {
+                gameState.categoryTotals[category.id] = 0;
+            });
+
+            // Reset UI
+            document.getElementById('completionMessage').style.display = 'none';
+            renderExpenseItems();
+            renderBudgetCategories();
+            updateGameDisplay();
+
+            showMessage('🎮 New game started! Good luck!', 'info');
+        }
+
+        /**
+         * Show game hint
+         * Displays educational budgeting tips
+         */
+        function showHint() {
+            const hint = `
+                💡 <strong>Budgeting Tips:</strong><br>
+                • Housing: 30% of income<br>
+                • Transportation: 15% of income<br>
+                • Food: 12% of income<br>
+                • Savings: 20% of income<br>
+                • Try to stay close to these percentages for the best score!
+            `;
+            showMessage(hint, 'info');
+        }
+
+        // =============================================
+        // INITIALIZATION
+        // =============================================
+
+        /**
+         * Initialize the game when the page loads
+         */
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeGame();
+        });
+    </script>
+</body>
+</html>

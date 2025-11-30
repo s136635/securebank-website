@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Calculator - SecureBank</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="images/logo.png" alt="Bank Logo" width="40" height="40" class="d-inline-block align-text-top me-2">
+                SecureBank
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="accounts.html">Accounts</a></li>
+                    <li class="nav-item"><a class="nav-link" href="transfers.html">Transfers</a></li>
+                    <li class="nav-item"><a class="nav-link" href="loans.html">Loans</a></li>
+                    <li class="nav-item"><a class="nav-link" href="support.html">Support</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="questionnaire.html">Feedback</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="calculator.html">Calculator</a></li>
+                    <li class="nav-item"><a class="nav-link" href="funpage.html">Fun & Games</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <!-- Header Section -->
+                <div class="text-center mb-5">
+                    <h1 class="display-4 text-primary mb-3">
+                        <i class="bi bi-calculator me-3"></i>Smart Loan Calculator
+                    </h1>
+                    <p class="lead text-muted">
+                        Calculate your monthly payments, total interest, and find the perfect loan plan for your needs
+                    </p>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Calculator Input Section -->
+                    <div class="col-lg-6">
+                        <div class="card bg-primary bg-gradient text-white shadow">
+                            <div class="card-body p-4">
+                                <h3 class="card-title h4 mb-4">
+                                    <i class="bi bi-input-cursor-text me-2"></i>Loan Details
+                                </h3>
+                                
+                                <form id="loanCalculatorForm">
+                                    <!-- Loan Amount -->
+                                    <div class="mb-4">
+                                        <label for="loanAmount" class="form-label fw-bold">
+                                            Loan Amount (OMR) *
+                                        </label>
+                                        <input type="range" class="form-range" id="loanAmount" 
+                                               min="1000" max="100000" step="1000" value="25000" required>
+                                        <div class="d-flex justify-content-between align-items-center mt-2">
+                                            <small>1,000 OMR</small>
+                                            <span class="badge bg-light text-dark fs-6" id="loanAmountValue">
+                                                25,000 OMR
+                                            </span>
+                                            <small>100,000 OMR</small>
+                                        </div>
+                                    </div>
+
+                                    <!-- Loan Term -->
+                                    <div class="mb-4">
+                                        <label for="loanTerm" class="form-label fw-bold">
+                                            Loan Term (Months) *
+                                        </label>
+                                        <input type="range" class="form-range" id="loanTerm" 
+                                               min="12" max="360" step="12" value="60" required>
+                                        <div class="d-flex justify-content-between align-items-center mt-2">
+                                            <small>12 months</small>
+                                            <span class="badge bg-light text-dark fs-6" id="loanTermValue">
+                                                60 months
+                                            </span>
+                                            <small>360 months</small>
+                                        </div>
+                                    </div>
+
+                                    <!-- Interest Rate -->
+                                    <div class="mb-4">
+                                        <label for="interestRate" class="form-label fw-bold">
+                                            Annual Interest Rate (%) *
+                                        </label>
+                                        <input type="range" class="form-range" id="interestRate" 
+                                               min="1" max="15" step="0.1" value="5.5" required>
+                                        <div class="d-flex justify-content-between align-items-center mt-2">
+                                            <small>1%</small>
+                                            <span class="badge bg-light text-dark fs-6" id="interestRateValue">
+                                                5.5%
+                                            </span>
+                                            <small>15%</small>
+                                        </div>
+                                    </div>
+
+                                    <!-- Customer Type -->
+                                    <div class="mb-4">
+                                        <label class="form-label fw-bold">Customer Type *</label>
+                                        <div class="btn-group w-100" role="group" id="customerType">
+                                            <input type="radio" class="btn-check" name="customerType" 
+                                                   id="regular" value="regular" checked>
+                                            <label class="btn btn-outline-light" for="regular">Regular</label>
+
+                                            <input type="radio" class="btn-check" name="customerType" 
+                                                   id="senior" value="senior">
+                                            <label class="btn btn-outline-light" for="senior">Senior (60+)</label>
+
+                                            <input type="radio" class="btn-check" name="customerType" 
+                                                   id="student" value="student">
+                                            <label class="btn btn-outline-light" for="student">Student</label>
+
+                                            <input type="radio" class="btn-check" name="customerType" 
+                                                   id="premium" value="premium">
+                                            <label class="btn btn-outline-light" for="premium">Premium</label>
+                                        </div>
+                                        <small class="text-light mt-1 d-block">
+                                            Different customer types qualify for special discounts and conditions
+                                        </small>
+                                    </div>
+
+                                    <!-- Additional Options -->
+                                    <div class="mb-4">
+                                        <label class="form-label fw-bold">Additional Options</label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" 
+                                                   id="insurance" name="insurance">
+                                            <label class="form-check-label" for="insurance">
+                                                Loan Protection Insurance (+0.5% to rate)
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" 
+                                                   id="flexibleRepayment" name="flexibleRepayment">
+                                            <label class="form-check-label" for="flexibleRepayment">
+                                                Flexible Repayment Options
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Calculate Button -->
+                                    <div class="d-grid">
+                                        <button type="button" class="btn btn-light btn-lg fw-bold" 
+                                                onclick="calculateLoan()">
+                                            <i class="bi bi-calculator-fill me-2"></i>Calculate Loan
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Results Section -->
+                    <div class="col-lg-6">
+                        <div class="card bg-success bg-gradient text-white shadow">
+                            <div class="card-body p-4">
+                                <h3 class="card-title h4 mb-4">
+                                    <i class="bi bi-graph-up me-2"></i>Calculation Results
+                                </h3>
+
+                                <!-- Results Display -->
+                                <div id="results" class="text-center">
+                                    <div class="alert alert-info bg-light text-dark">
+                                        <i class="bi bi-info-circle me-2"></i>
+                                        Enter your loan details and click "Calculate Loan" to see results
+                                    </div>
+                                </div>
+
+                                <!-- Detailed Breakdown -->
+                                <div id="detailedResults" class="d-none">
+                                    <!-- Monthly Payment -->
+                                    <div class="mb-3 p-3 bg-light bg-opacity-25 rounded">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="fw-bold">Monthly Payment:</span>
+                                            <span class="fs-4 fw-bold" id="monthlyPayment">-</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Total Amounts -->
+                                    <div class="row g-2 mb-3">
+                                        <div class="col-6">
+                                            <div class="p-2 bg-light bg-opacity-25 rounded text-center">
+                                                <small class="d-block">Total Interest</small>
+                                                <strong class="fs-5" id="totalInterest">-</strong>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="p-2 bg-light bg-opacity-25 rounded text-center">
+                                                <small class="d-block">Total Payment</small>
+                                                <strong class="fs-5" id="totalPayment">-</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Applied Discounts & Conditions -->
+                                    <div class="mb-3">
+                                        <h6 class="fw-bold mb-2">Applied Conditions:</h6>
+                                        <div id="appliedConditions" class="small">
+                                            <!-- Conditions will be displayed here -->
+                                        </div>
+                                    </div>
+
+                                    <!-- Calculation Steps -->
+                                    <div class="bg-light text-dark rounded p-3 mt-3">
+                                        <h6 class="fw-bold mb-2">
+                                            <i class="bi bi-gear me-1"></i>Calculation Steps:
+                                        </h6>
+                                        <div id="calculationSteps" class="small">
+                                            <!-- Steps will be displayed here -->
+                                        </div>
+                                    </div>
+
+                                    <!-- Action Buttons -->
+                                    <div class="d-grid gap-2 mt-4">
+                                        <button class="btn btn-outline-light" onclick="saveCalculation()">
+                                            <i class="bi bi-save me-1"></i>Save Calculation
+                                        </button>
+                                        <button class="btn btn-outline-light" onclick="printCalculation()">
+                                            <i class="bi bi-printer me-1"></i>Print Results
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Loan Comparison Table -->
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-body">
+                        <h4 class="card-title h5 mb-3">
+                            <i class="bi bi-bar-chart me-2"></i>Loan Comparison
+                        </h4>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover" id="loanComparisonTable">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Loan Type</th>
+                                        <th>Amount (OMR)</th>
+                                        <th>Term (Months)</th>
+                                        <th>Monthly Payment</th>
+                                        <th>Total Interest</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="loanComparisonBody">
+                                    <!-- Saved calculations will appear here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>&copy; 2025 SecureBank. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="text-white text-decoration-none me-3">Privacy Policy</a>
+                    <a href="#" class="text-white text-decoration-none">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- JavaScript for Advanced Loan Calculator -->
+    <script>
+        /**
+         * ADVANCED LOAN CALCULATOR WITH COMPLEX MATHEMATICAL OPERATIONS
+         * This calculator implements realistic loan calculations with multiple conditions and discounts
+         * Uses mathematical operators, relational operators, and logical operators
+         */
+
+        // =============================================
+        // GLOBAL VARIABLES AND CONFIGURATION
+        // =============================================
+
+        /**
+         * Array to store saved calculations for comparison
+         * Each calculation object contains loan details and results
+         */
+        let savedCalculations = [];
+
+        /**
+         * Configuration for different customer types and their benefits
+         * Each customer type has a discount percentage and description
+         */
+        const customerBenefits = {
+            regular: { discount: 0, description: "Standard rates apply" },
+            senior: { discount: 10, description: "10% discount for customers aged 60+" },
+            student: { discount: 5, description: "5% discount for students" },
+            premium: { discount: 15, description: "15% discount for premium customers" }
+        };
+
+        // =============================================
+        // INITIALIZATION FUNCTIONS
+        // =============================================
+
+        /**
+         * Initialize the calculator when the page loads
+         * Sets up event listeners and initial display values
+         */
+        function initializeCalculator() {
+            // Update slider value displays in real-time using event listeners
+            document.getElementById('loanAmount').addEventListener('input', function() {
+                document.getElementById('loanAmountValue').textContent = 
+                    formatCurrency(this.value) + ' OMR';
+            });
+
+            document.getElementById('loanTerm').addEventListener('input', function() {
+                document.getElementById('loanTermValue').textContent = 
+                    this.value + ' months';
+            });
+
+            document.getElementById('interestRate').addEventListener('input', function() {
+                document.getElementById('interestRateValue').textContent = 
+                    this.value + '%';
+            });
+
+            // Load any previously saved calculations from localStorage
+            loadSavedCalculations();
+        }
+
+        // =============================================
+        // MAIN CALCULATION FUNCTION (Point 2b)
+        // =============================================
+
+        /**
+         * Main function to calculate loan details with advanced conditions
+         * Uses mathematical operators, relational operators, and logical operators
+         */
+        function calculateLoan() {
+            // Get input values from the form using DOM manipulation
+            const loanAmount = parseFloat(document.getElementById('loanAmount').value);
+            const loanTerm = parseInt(document.getElementById('loanTerm').value);
+            let interestRate = parseFloat(document.getElementById('interestRate').value);
+            
+            // Get customer type and additional options using form elements
+            const customerType = document.querySelector('input[name="customerType"]:checked').value;
+            const hasInsurance = document.getElementById('insurance').checked;
+            const hasFlexibleRepayment = document.getElementById('flexibleRepayment').checked;
+
+            // =============================================
+            // ADVANCED CONDITIONAL LOGIC WITH MATHEMATICAL OPERATIONS
+            // =============================================
+
+            /**
+             * STEP 1: Apply customer-specific discounts using relational operators
+             * Different customer types get different interest rate discounts
+             */
+            let appliedDiscount = 0;
+            let discountDescription = '';
+
+            // Using if-else statements with relational operators for customer classification
+            if (customerType === 'senior') {
+                // Senior citizens (age 60+) get 10% discount - relational operator: ===
+                appliedDiscount = customerBenefits.senior.discount;
+                discountDescription = customerBenefits.senior.description;
+            } 
+            else if (customerType === 'student') {
+                // Students get 5% discount - relational operator: ===
+                appliedDiscount = customerBenefits.student.discount;
+                discountDescription = customerBenefits.student.description;
+            } 
+            else if (customerType === 'premium') {
+                // Premium customers get 15% discount - relational operator: ===
+                appliedDiscount = customerBenefits.premium.discount;
+                discountDescription = customerBenefits.premium.description;
+            }
+            else {
+                // Regular customers get no discount
+                appliedDiscount = customerBenefits.regular.discount;
+                discountDescription = customerBenefits.regular.description;
+            }
+
+            // Apply the discount to interest rate using mathematical operations
+            // Mathematical operator: multiplication (*) and division (/)
+            const discountedRate = interestRate * (1 - appliedDiscount / 100);
+
+            /**
+             * STEP 2: Apply additional conditions and fees using logical operators
+             */
+            let additionalFees = 0;
+            let conditions = [discountDescription];
+
+            // Using logical AND operator (&&) to check multiple conditions
+            if (hasInsurance && loanAmount > 10000) {
+                // Loan protection insurance adds 0.5% to rate for loans over 10,000 OMR
+                // Logical AND: both conditions must be true
+                additionalFees += 0.5;
+                conditions.push("+0.5% for loan protection insurance");
+            }
+
+            // Using relational operators (>, <) for loan amount-based conditions
+            if (loanAmount > 50000 && loanTerm > 60) {
+                // Large long-term loans get additional 0.25% reduction
+                // Relational operators: > (greater than)
+                additionalFees -= 0.25;
+                conditions.push("-0.25% for large long-term loan");
+            }
+
+            // Final interest rate after all adjustments
+            // Mathematical operator: addition (+)
+            const finalInterestRate = discountedRate + additionalFees;
+
+            /**
+             * STEP 3: Complex mathematical calculations for loan amortization
+             * Using mathematical operators: +, -, *, /, and Math functions
+             */
+            
+            // Convert annual rate to monthly rate and term to months
+            // Mathematical operators: division (/)
+            const monthlyRate = finalInterestRate / 100 / 12;
+            const numberOfPayments = loanTerm;
+
+            // Complex formula: Monthly Payment = P * (r(1+r)^n) / ((1+r)^n - 1)
+            // Where P = principal, r = monthly rate, n = number of payments
+            // Mathematical operators: multiplication (*), exponentiation (Math.pow)
+            const monthlyPayment = loanAmount * 
+                (monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments)) / 
+                (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
+
+            // Calculate total payment and total interest using mathematical operations
+            // Mathematical operators: multiplication (*), subtraction (-)
+            const totalPayment = monthlyPayment * numberOfPayments;
+            const totalInterest = totalPayment - loanAmount;
+
+            /**
+             * STEP 4: Apply flexible repayment conditions using advanced logic
+             */
+            let adjustedMonthlyPayment = monthlyPayment;
+            
+            // Using logical OR operator (||) to check multiple flexible repayment options
+            if (hasFlexibleRepayment || customerType === 'senior') {
+                // Flexible repayment or senior citizens can have 3 months interest-free at start
+                const firstThreeMonthsPayment = loanAmount * monthlyRate;
+                // Relational operator: < (less than)
+                if (firstThreeMonthsPayment < monthlyPayment) {
+                    adjustedMonthlyPayment = firstThreeMonthsPayment;
+                    conditions.push("First 3 months at reduced payment (interest only)");
+                }
+            }
+
+            // =============================================
+            // DISPLAY RESULTS
+            // =============================================
+
+            displayResults(
+                adjustedMonthlyPayment, 
+                totalInterest, 
+                totalPayment, 
+                conditions, 
+                finalInterestRate
+            );
+
+            displayCalculationSteps(
+                loanAmount, 
+                loanTerm, 
+                interestRate, 
+                appliedDiscount, 
+                additionalFees, 
+                finalInterestRate
+            );
+        }
+
+        // =============================================
+        // SUPPORTING CALCULATION FUNCTIONS
+        // =============================================
+
+        /**
+         * Display the main calculation results
+         * Updates the DOM with formatted calculation results
+         */
+        function displayResults(monthlyPayment, totalInterest, totalPayment, conditions, finalRate) {
+            // Show detailed results section using Bootstrap classes
+            document.getElementById('detailedResults').classList.remove('d-none');
+            document.getElementById('results').classList.add('d-none');
+
+            // Update result values with formatted currency
+            document.getElementById('monthlyPayment').textContent = formatCurrency(monthlyPayment) + ' OMR';
+            document.getElementById('totalInterest').textContent = formatCurrency(totalInterest) + ' OMR';
+            document.getElementById('totalPayment').textContent = formatCurrency(totalPayment) + ' OMR';
+
+            // Display applied conditions using Bootstrap badges
+            const conditionsHtml = conditions.map(condition => 
+                `<span class="badge bg-light text-dark me-1 mb-1">${condition}</span>`
+            ).join('');
+            document.getElementById('appliedConditions').innerHTML = conditionsHtml;
+
+            // Add final rate information
+            document.getElementById('appliedConditions').innerHTML += 
+                `<div class="mt-2"><strong>Final Effective Rate: ${finalRate.toFixed(2)}%</strong></div>`;
+        }
+
+        /**
+         * Display detailed calculation steps for transparency
+         * Shows the mathematical steps taken in the calculation
+         */
+        function displayCalculationSteps(loanAmount, loanTerm, baseRate, discount, additionalFees, finalRate) {
+            const steps = [
+                `Base Loan Amount: ${formatCurrency(loanAmount)} OMR`,
+                `Loan Term: ${loanTerm} months`,
+                `Base Interest Rate: ${baseRate}%`,
+                `Customer Discount: ${discount}%`,
+                `Additional Fees/Adjustments: ${additionalFees}%`,
+                `Final Effective Rate: ${finalRate.toFixed(2)}%`,
+                `Monthly Rate: ${(finalRate / 12).toFixed(4)}%`,
+                `Using formula: P × [r(1+r)^n] / [(1+r)^n - 1]`
+            ];
+
+            const stepsHtml = steps.map(step => `<div class="mb-1">• ${step}</div>`).join('');
+            document.getElementById('calculationSteps').innerHTML = stepsHtml;
+        }
+
+        // =============================================
+        // UTILITY FUNCTIONS
+        // =============================================
+
+        /**
+         * Format currency values with proper formatting
+         * Uses Intl.NumberFormat for professional currency display
+         */
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('en-US', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }).format(amount);
+        }
+
+        /**
+         * Save current calculation to comparison table
+         * Stores calculation in array and updates the comparison table
+         */
+        function saveCalculation() {
+            const monthlyPayment = document.getElementById('monthlyPayment').textContent;
+            const totalInterest = document.getElementById('totalInterest').textContent;
+            
+            // Validation check using relational operator: ===
+            if (monthlyPayment === '-') {
+                alert('Please calculate a loan first before saving.');
+                return;
+            }
+
+            const loanAmount = document.getElementById('loanAmount').value;
+            const loanTerm = document.getElementById('loanTerm').value;
+            const customerType = document.querySelector('input[name="customerType"]:checked').value;
+
+            const calculation = {
+                id: Date.now(), // Unique identifier
+                loanType: customerType.charAt(0).toUpperCase() + customerType.slice(1) + ' Loan',
+                amount: parseFloat(loanAmount),
+                term: parseInt(loanTerm),
+                monthlyPayment: monthlyPayment,
+                totalInterest: totalInterest
+            };
+
+            // Add to array and update display
+            savedCalculations.push(calculation);
+            updateComparisonTable();
+            
+            // Show success message
+            alert('Calculation saved to comparison table!');
+        }
+
+        /**
+         * Update the loan comparison table with saved calculations
+         * Dynamically generates table rows from savedCalculations array
+         */
+        function updateComparisonTable() {
+            const tableBody = document.getElementById('loanComparisonBody');
+            tableBody.innerHTML = '';
+
+            // Check if no calculations exist using relational operator: ===
+            if (savedCalculations.length === 0) {
+                tableBody.innerHTML = `
+                    <tr>
+                        <td colspan="6" class="text-center text-muted">
+                            No saved calculations yet. Calculate and save a loan to see comparisons.
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            // Generate table rows for each saved calculation
+            savedCalculations.forEach(calc => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${calc.loanType}</td>
+                    <td>${formatCurrency(calc.amount)} OMR</td>
+                    <td>${calc.term} months</td>
+                    <td class="fw-bold text-primary">${calc.monthlyPayment}</td>
+                    <td class="fw-bold text-warning">${calc.totalInterest}</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-danger" onclick="deleteCalculation(${calc.id})">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        /**
+         * Delete a saved calculation
+         * Uses array filtering to remove calculation by ID
+         */
+        function deleteCalculation(id) {
+            // Confirmation dialog
+            if (confirm('Are you sure you want to delete this calculation?')) {
+                // Filter out the calculation to delete
+                savedCalculations = savedCalculations.filter(calc => calc.id !== id);
+                updateComparisonTable();
+            }
+        }
+
+        /**
+         * Load saved calculations from localStorage
+         * Retrieves data from browser's local storage
+         */
+        function loadSavedCalculations() {
+            const saved = localStorage.getItem('savedLoanCalculations');
+            // Logical AND operator for conditional execution
+            if (saved) {
+                savedCalculations = JSON.parse(saved);
+                updateComparisonTable();
+            }
+        }
+
+        /**
+         * Save calculations to localStorage
+         * Stores data in browser's local storage for persistence
+         */
+        function saveToLocalStorage() {
+            localStorage.setItem('savedLoanCalculations', JSON.stringify(savedCalculations));
+        }
+
+        /**
+         * Print the calculation results
+         * Opens print dialog with formatted calculation results
+         */
+        function printCalculation() {
+            const monthlyPayment = document.getElementById('monthlyPayment').textContent;
+            // Validation using relational operator: ===
+            if (monthlyPayment === '-') {
+                alert('Please calculate a loan first before printing.');
+                return;
+            }
+
+            const printContent = `
+                <html>
+                    <head>
+                        <title>SecureBank Loan Calculation</title>
+                        <style>
+                            body { font-family: Arial, sans-serif; padding: 20px; }
+                            .header { text-align: center; margin-bottom: 30px; }
+                            .result { background: #f8f9fa; padding: 15px; margin: 10px 0; border-radius: 5px; }
+                            .footer { margin-top: 30px; text-align: center; font-size: 12px; color: #666; }
+                        </style>
+                    </head>
+                    <body>
+                        <div class="header">
+                            <h2>SecureBank Loan Calculation</h2>
+                            <p>Generated on ${new Date().toLocaleDateString()}</p>
+                        </div>
+                        <div class="result">
+                            <h3>Loan Summary</h3>
+                            <p><strong>Monthly Payment:</strong> ${document.getElementById('monthlyPayment').textContent}</p>
+                            <p><strong>Total Interest:</strong> ${document.getElementById('totalInterest').textContent}</p>
+                            <p><strong>Total Payment:</strong> ${document.getElementById('totalPayment').textContent}</p>
+                        </div>
+                        <div class="footer">
+                            <p>Thank you for using SecureBank Loan Calculator</p>
+                            <p>www.securebank.com | +968 1234 5678</p>
+                        </div>
+                    </body>
+                </html>
+            `;
+
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(printContent);
+            printWindow.document.close();
+            printWindow.print();
+        }
+
+        // =============================================
+        // INITIALIZATION
+        // =============================================
+
+        /**
+         * Initialize the calculator when the page loads
+         * Sets up event listeners and loads saved data
+         */
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeCalculator();
+            
+            // Save to localStorage before page unload
+            window.addEventListener('beforeunload', saveToLocalStorage);
+        });
+    </script>
+</body>
+</html>
